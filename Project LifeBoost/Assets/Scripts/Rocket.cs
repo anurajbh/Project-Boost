@@ -1,42 +1,72 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] float mainThrust = 100f;
+
+    //Game Config
+    int scene;
+    enum State { Alive, Dead, Transcending }
     Rigidbody rb;
     AudioSource aud;
+
+    // Game initialization
+    [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
-    // Use this for initialization
+    [SerializeField] State state = State.Alive;
+
     void Start()
     {
+        int scene = SceneManager.GetActiveScene().buildIndex;
         rb = GetComponent<Rigidbody>();
         aud = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
     {
-        Thrust();
-        Rotate();
+        scene = SceneManager.GetActiveScene().buildIndex;
+        if (state == State.Alive)
+        {
+            Thrust();
+            Rotate();
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
+        if(state != State.Alive)
+        {
+            return;
+        }
         switch (collision.gameObject.tag)
         {
 
             case "Friendly":
                 print("OK");
                 break;
-            case "Fuel":
-                print("Refueled");
+            case "Finish":
+                print("Congrats");
+                state = State.Transcending;
+                Invoke("LoadTheScene", 1f);
                 break;
             default:
                 print("Dead");
+                state = State.Dead;
+                Invoke("LoadTheScene", 2f);
                 break;
         }
     }
+    void LoadTheScene()
+    {
+        if(state == State.Dead)
+        {
+            SceneManager.LoadScene(scene);
+        }
+        else if(state == State.Transcending)
+        {
+            SceneManager.LoadScene(scene+1);
+        }
+        
+    }
+
     private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
