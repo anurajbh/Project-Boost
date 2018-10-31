@@ -99,7 +99,6 @@ public class Rocket : MonoBehaviour
         else
         {
             aud.Stop();
-            thrustEffect.Play();
         }
     }
 
@@ -108,8 +107,10 @@ public class Rocket : MonoBehaviour
         if (!aud.isPlaying)
         {
             aud.PlayOneShot(mainEngine);
+            
         }
         thrustEffect.Play();
+
     }
 
     private void Rotate()
