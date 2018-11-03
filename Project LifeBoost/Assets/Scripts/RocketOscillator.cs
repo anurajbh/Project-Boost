@@ -27,6 +27,11 @@ public class RocketOscillator : MonoBehaviour
 
     private void Oscillate()
     {
+        if(period <= Mathf.Epsilon)
+        {
+            print("NaN error");
+            return;
+        }
         float cycles = Time.time / period;
         float sineWave = Mathf.Sin(cycles * tau);
         movementFactor = sineWave / 4f + 0.5f;

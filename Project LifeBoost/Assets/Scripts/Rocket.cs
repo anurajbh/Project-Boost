@@ -13,7 +13,9 @@ public class Rocket : MonoBehaviour
     // Game initialization
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
+    [SerializeField] float levelLoadDelay = 2f;
     [SerializeField] State state = State.Alive;
+    
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip death;
     [SerializeField] AudioClip levelLoad;
@@ -63,7 +65,7 @@ public class Rocket : MonoBehaviour
         thrustEffect.Stop();
         aud.PlayOneShot(death);
         deathEffect.Play();
-        Invoke("LoadTheScene", 2f);
+        Invoke("LoadTheScene", levelLoadDelay);
     }
 
     private void LoadTheNextLevel()
@@ -73,7 +75,7 @@ public class Rocket : MonoBehaviour
         thrustEffect.Stop();
         aud.PlayOneShot(levelLoad);
         levelLoadEffect.Play();
-        Invoke("LoadTheScene", 1f);
+        Invoke("LoadTheScene", levelLoadDelay);
     }
 
     void LoadTheScene()
@@ -98,6 +100,7 @@ public class Rocket : MonoBehaviour
         }
         else
         {
+            thrustEffect.Stop();
             aud.Stop();
         }
     }
@@ -110,7 +113,6 @@ public class Rocket : MonoBehaviour
             
         }
         thrustEffect.Play();
-
     }
 
     private void Rotate()
