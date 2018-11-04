@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 4244242533397670}
   - component: {fileID: 33677395748929874}
   - component: {fileID: 23755806050126004}
-  - component: {fileID: 65398615371420422}
   m_Layer: 0
   m_Name: StarboardBooster
   m_TagString: Untagged
@@ -121,7 +120,6 @@ GameObject:
   - component: {fileID: 4889614639008102}
   - component: {fileID: 33903026371273160}
   - component: {fileID: 23390847302714332}
-  - component: {fileID: 65397468382416340}
   m_Layer: 0
   m_Name: RocketBody
   m_TagString: Untagged
@@ -139,6 +137,7 @@ GameObject:
   - component: {fileID: 4307061432783384}
   - component: {fileID: 54630509329874944}
   - component: {fileID: 82876011830649448}
+  - component: {fileID: 65883004175673912}
   - component: {fileID: 114736384547659292}
   m_Layer: 0
   m_Name: RocketShip 1
@@ -157,7 +156,6 @@ GameObject:
   - component: {fileID: 4400411270745208}
   - component: {fileID: 33330913808640438}
   - component: {fileID: 23514558956405858}
-  - component: {fileID: 65328955369286930}
   m_Layer: 0
   m_Name: PortBooster
   m_TagString: Untagged
@@ -175,7 +173,6 @@ GameObject:
   - component: {fileID: 4585826741478342}
   - component: {fileID: 33017954565162260}
   - component: {fileID: 23837518096348802}
-  - component: {fileID: 135221329175202542}
   m_Layer: 0
   m_Name: RocketNose
   m_TagString: Untagged
@@ -536,42 +533,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!65 &65328955369286930
+--- !u!65 &65883004175673912
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1539747809122560}
+  m_GameObject: {fileID: 1435287303643414}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65397468382416340
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1313420069197380}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65398615371420422
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1256411261354898}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0101013, y: 3.6769009, z: 1}
+  m_Center: {x: -0.005050659, y: 0.012537956, z: 0}
 --- !u!82 &82237237434379852
 AudioSource:
   m_ObjectHideFlags: 1
@@ -851,24 +824,13 @@ MonoBehaviour:
   rcsThrust: 275
   levelLoadDelay: 2
   state: 0
+  collisionsAreDisabled: 0
   mainEngine: {fileID: 8300000, guid: 65fc176ca11a79d4a808b737f6231776, type: 3}
   death: {fileID: 8300000, guid: 956b425e203e2cd4abd91f17d8e1d714, type: 3}
   levelLoad: {fileID: 8300000, guid: 01af4bd84bdd8cd4fa0cd7789de0627e, type: 3}
   thrustEffect: {fileID: 198833896558195324}
   deathEffect: {fileID: 198728654476016976}
   levelLoadEffect: {fileID: 198543906365487088}
---- !u!135 &135221329175202542
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1755103546757388}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198543906365487088
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -9,13 +9,14 @@ public class Rocket : MonoBehaviour
     Rigidbody rb;
     AudioSource aud;
     AudioSource audThrust;
-    Collider m_Collider;
-
+    
     // Game initialization
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float levelLoadDelay = 2f;
     [SerializeField] State state = State.Alive;
+
+    [SerializeField] bool collisionsAreDisabled = false;
     
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip death;
@@ -29,7 +30,6 @@ public class Rocket : MonoBehaviour
         int scene = SceneManager.GetActiveScene().buildIndex;
         rb = GetComponent<Rigidbody>();
         aud = GetComponent<AudioSource>();
-        m_Collider = GetComponent<Collider>();
     }
     // Update is called once per frame
     void Update()
@@ -39,11 +39,16 @@ public class Rocket : MonoBehaviour
         {
             RespondToThrust();
             Rotate();
+            
+        }
+        if(Debug.isDebugBuild)
+        {
+            RespondToDebugKeys();
         }
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(state != State.Alive)
+        if(state != State.Alive || collisionsAreDisabled)
         {
             return;
         }
@@ -104,18 +109,25 @@ public class Rocket : MonoBehaviour
         {
             state = State.Transcending;
         }
-        else if(Input.GetKey(KeyCode.C))
-        {
-                //Toggle the Collider on and off when pressing the space bar
-                m_Collider.enabled = !m_Collider.enabled;
-                //Output to console whether the Collider is on or not
-                Debug.Log("Collider.enabled = " + m_Collider.enabled);
-        }
+        
         else
         {
             thrustEffect.Stop();
             aud.Stop();
         }
+    }
+
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionsAreDisabled = !collisionsAreDisabled;
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadTheNextLevel();
+        }
+        
     }
 
     private void ApplyThrust()
