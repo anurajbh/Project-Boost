@@ -34,7 +34,7 @@ public class RocketOscillator : MonoBehaviour
         }
         float cycles = Time.time / period;
         float sineWave = Mathf.Sin(cycles * tau);
-        movementFactor = sineWave / 4f + 0.5f;
+        movementFactor = sineWave / 2f + 0.5f;
         offset = movementFactor * movementPlatform;
         transform.position = startingPos + offset;
     }

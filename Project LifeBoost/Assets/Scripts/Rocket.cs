@@ -9,6 +9,7 @@ public class Rocket : MonoBehaviour
     Rigidbody rb;
     AudioSource aud;
     AudioSource audThrust;
+    Collider m_Collider;
 
     // Game initialization
     [SerializeField] float mainThrust = 100f;
@@ -28,6 +29,7 @@ public class Rocket : MonoBehaviour
         int scene = SceneManager.GetActiveScene().buildIndex;
         rb = GetComponent<Rigidbody>();
         aud = GetComponent<AudioSource>();
+        m_Collider = GetComponent<Collider>();
     }
     // Update is called once per frame
     void Update()
@@ -97,6 +99,17 @@ public class Rocket : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.up * mainThrust);
             ApplyThrust();
+        }
+        else if(Input.GetKey(KeyCode.L))
+        {
+            state = State.Transcending;
+        }
+        else if(Input.GetKey(KeyCode.C))
+        {
+                //Toggle the Collider on and off when pressing the space bar
+                m_Collider.enabled = !m_Collider.enabled;
+                //Output to console whether the Collider is on or not
+                Debug.Log("Collider.enabled = " + m_Collider.enabled);
         }
         else
         {
