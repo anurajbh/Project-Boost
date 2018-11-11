@@ -5,7 +5,7 @@ Welcome to Project Boost, a platformer I am creating for the Udemy course I am d
 
 <b>Keys</b>
 
-Space- Thrust
+Space - Thrust
 
 A - Left
 
