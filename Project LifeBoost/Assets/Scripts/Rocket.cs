@@ -4,7 +4,8 @@ public class Rocket : MonoBehaviour
 {
 
     //Game Config
-    int scene;
+    Scene scene;
+    int sceneIndex;
     enum State { Alive, Dead, Transcending }
     Rigidbody rb;
     AudioSource aud;
@@ -27,14 +28,16 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem levelLoadEffect;
     void Start()
     {
-        int scene = SceneManager.GetActiveScene().buildIndex;
+        scene = SceneManager.GetActiveScene();
+        sceneIndex = scene.buildIndex;
         rb = GetComponent<Rigidbody>();
         aud = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
     {
-        scene = SceneManager.GetActiveScene().buildIndex;
+        scene = SceneManager.GetActiveScene();
+        sceneIndex = scene.buildIndex;
         if (state == State.Alive)
         {
             RespondToThrust();
@@ -89,11 +92,16 @@ public class Rocket : MonoBehaviour
     {
         if(state == State.Dead)
         {
-            SceneManager.LoadScene(scene);
+            SceneManager.LoadScene(sceneIndex);
         }
         else if(state == State.Transcending)
         {
-            SceneManager.LoadScene(scene+1);
+            int nextScene = sceneIndex + 1;
+            if (nextScene == SceneManager.sceneCountInBuildSettings)//check if last scene
+            {
+                nextScene = 0;
+            }
+            SceneManager.LoadScene(nextScene);
         }
         
     }
